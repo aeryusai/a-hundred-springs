@@ -19,65 +19,31 @@
             font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
             background: #0a0a0c;
             color: #e8e8e8;
-            overflow-x: scroll;
-            overflow-y: hidden;
-            height: 100vh;
-            cursor: grab;
+            line-height: 1.8;
+            overflow-x: hidden;
         }
 
-        body:active {
-            cursor: grabbing;
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
         }
 
-        .manga-container {
-            display: flex;
-            height: 100vh;
-            gap: 0;
-            scroll-snap-type: x mandatory;
-        }
-
-        .panel {
-            flex: 0 0 100vw;
-            height: 100vh;
-            scroll-snap-align: start;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            background: #0a0a0c;
-        }
-
-        .panel-content {
-            max-width: 800px;
+        .poster {
             width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            border: 3px solid #333;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
-        /* Manga panel borders */
-        .panel::before {
-            content: '';
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            right: 1rem;
-            bottom: 1rem;
-            border: 2px solid #333;
-            pointer-events: none;
-        }
-
-        /* Title panel */
-        .title-panel {
+        .title-section {
             text-align: center;
-            background: radial-gradient(circle at center, #1a1a1e 0%, #0a0a0c 100%);
+            margin-bottom: 4rem;
         }
 
-        .title-panel h1 {
-            font-size: 4rem;
+        .title-section h1 {
+            font-size: 3.5rem;
             font-weight: 900;
             letter-spacing: 0.1em;
             margin-bottom: 1rem;
@@ -87,31 +53,47 @@
             background-clip: text;
         }
 
-        .title-panel .subtitle {
+        .title-section .subtitle {
             font-size: 1.2rem;
             color: #888;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
-        .title-panel .author {
-            font-size: 1rem;
+        .title-section .author {
+            font-size: 1.1rem;
             color: #aaa;
-            margin-top: 2rem;
         }
 
-        /* Illustration styles */
+        .manga-panel {
+            margin: 3rem 0;
+            position: relative;
+            background: #111;
+            border: 2px solid #333;
+            padding: 2rem;
+        }
+
+        .manga-panel::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid #222;
+            pointer-events: none;
+        }
+
         .illustration {
             width: 100%;
             max-width: 500px;
             margin: 2rem auto;
+            display: block;
         }
 
-        /* Story text */
         .story-text {
             font-size: 1.1rem;
-            line-height: 1.8;
             color: #d8d8d8;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
@@ -123,69 +105,55 @@
             font-style: italic;
             color: #fff;
             font-size: 1.2rem;
-            padding: 1rem;
+            padding: 1.2rem 1.5rem;
             background: rgba(255, 255, 255, 0.05);
-            border-left: 3px solid #ff6b9d;
-            margin: 1rem 0;
+            border-left: 4px solid #ff6b9d;
+            margin: 1.5rem 0;
+            font-weight: 500;
         }
 
         .narration {
-            color: #aaa;
+            color: #999;
             font-size: 0.95rem;
+            font-style: italic;
         }
 
-        /* Closing panel */
-        .closing-panel {
+        .closing {
             text-align: center;
+            margin-top: 5rem;
+            padding: 3rem 0;
+            border-top: 2px solid #333;
         }
 
-        .closing-panel .final-line {
-            font-size: 2rem;
+        .closing .final-line {
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             background: linear-gradient(135deg, #ff6b9d 0%, #ffd4e5 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .closing-panel .credit {
+        .closing .credit {
             font-size: 0.9rem;
             color: #666;
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
 
-        /* Scroll indicator */
-        .scroll-hint {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            color: #666;
-            font-size: 0.9rem;
-            z-index: 100;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        /* Sakura petals */
         .petal {
             position: fixed;
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: radial-gradient(circle at 30% 30%, #ff9ec7 0%, #ff6b9d 100%);
             border-radius: 50% 0 50% 0;
             pointer-events: none;
             z-index: 1000;
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .title-panel h1 {
+            .title-section h1 {
                 font-size: 2.5rem;
             }
 
@@ -193,219 +161,331 @@
                 font-size: 1rem;
             }
 
-            .panel {
-                padding: 1rem;
+            .manga-panel {
+                padding: 1.5rem;
             }
 
-            .panel::before {
-                top: 0.5rem;
-                left: 0.5rem;
-                right: 0.5rem;
-                bottom: 0.5rem;
+            .container {
+                padding: 1rem 0.5rem;
             }
-        }
-
-        /* Scrollbar styling */
-        ::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #1a1a1e;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
         }
     </style>
 </head>
 <body>
-    <div class="scroll-hint">← Scroll →</div>
-
-    <div class="manga-container">
-        <!-- Title Panel with Cover Illustration -->
-        <div class="panel title-panel">
-            <div class="panel-content">
-                <svg class="illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Sky gradient -->
-                    <defs>
-                        <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#16213e;stop-opacity:1" />
-                        </linearGradient>
-                        <linearGradient id="water" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#0f3460;stop-opacity:0.6" />
-                            <stop offset="100%" style="stop-color:#16213e;stop-opacity:0.8" />
-                        </linearGradient>
-                    </defs>
-                    
-                    <!-- Background -->
-                    <rect width="400" height="300" fill="url(#sky)"/>
-                    
-                    <!-- Moon -->
-                    <circle cx="320" cy="80" r="40" fill="#e8e8e8" opacity="0.3"/>
-                    
-                    <!-- Waterfall -->
-                    <rect x="150" y="100" width="100" height="200" fill="url(#water)" opacity="0.5"/>
-                    <path d="M 150 100 Q 200 120 250 100 L 250 300 L 150 300 Z" fill="#4a5568" opacity="0.3"/>
-                    
-                    <!-- Crane silhouette -->
-                    <g transform="translate(80, 150)" fill="#e8e8e8" opacity="0.8">
-                        <ellipse cx="0" cy="0" rx="15" ry="20"/>
-                        <path d="M -5 -15 Q -10 -30 0 -35 Q 10 -30 5 -15 Z"/>
-                        <line x1="0" y1="20" x2="-5" y2="40" stroke="#e8e8e8" stroke-width="2"/>
-                        <line x1="0" y1="20" x2="5" y2="40" stroke="#e8e8e8" stroke-width="2"/>
-                    </g>
-                    
-                    <!-- Koi silhouette -->
-                    <g transform="translate(200, 220)" fill="#ff6b9d" opacity="0.7">
-                        <ellipse cx="0" cy="0" rx="20" ry="8"/>
-                        <path d="M 20 0 L 30 -5 L 30 5 Z"/>
-                    </g>
-                    
-                    <!-- Sakura petals -->
-                    <circle cx="100" cy="50" r="3" fill="#ff9ec7" opacity="0.6"/>
-                    <circle cx="250" cy="80" r="4" fill="#ff6b9d" opacity="0.5"/>
-                    <circle cx="300" cy="120" r="3" fill="#ffd4e5" opacity="0.7"/>
-                    <circle cx="180" cy="60" r="3" fill="#ff9ec7" opacity="0.6"/>
-                </svg>
+    <div class="container">
+        <!-- Poster/Cover Illustration -->
+        <div class="title-section">
+            <svg class="poster" viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="nightSky" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#0a0a1e;stop-opacity:1" />
+                        <stop offset="50%" style="stop-color:#16213e;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#1a1a2e;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="waterfallGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#4a90e2;stop-opacity:0.3" />
+                        <stop offset="100%" style="stop-color:#0f3460;stop-opacity:0.6" />
+                    </linearGradient>
+                    <radialGradient id="moonGlow">
+                        <stop offset="0%" style="stop-color:#fff;stop-opacity:0.8" />
+                        <stop offset="100%" style="stop-color:#fff;stop-opacity:0" />
+                    </radialGradient>
+                </defs>
                 
-                <h1>A Hundred Springs</h1>
-                <div class="subtitle">A koi, a crane, and a dream that took a lifetime of petals</div>
-                <div class="author">Zaragoza, Cyrel</div>
+                <rect width="600" height="800" fill="url(#nightSky)"/>
+                <circle cx="480" cy="120" r="60" fill="url(#moonGlow)"/>
+                <circle cx="480" cy="120" r="40" fill="#e8e8e8" opacity="0.9"/>
+                <path d="M 0 400 L 100 300 L 200 350 L 300 280 L 400 320 L 500 290 L 600 350 L 600 800 L 0 800 Z" 
+                      fill="#0a0a0c" opacity="0.8"/>
+                <rect x="250" y="200" width="100" height="400" fill="url(#waterfallGrad)" opacity="0.6"/>
+                <path d="M 250 200 Q 300 250 350 200 L 350 600 L 250 600 Z" fill="#fff" opacity="0.2"/>
+                <ellipse cx="300" cy="650" rx="200" ry="50" fill="#0f3460" opacity="0.5"/>
+                
+                <g transform="translate(150, 500)" fill="#e8e8e8">
+                    <ellipse cx="0" cy="0" rx="25" ry="35"/>
+                    <path d="M -10 -30 Q -15 -60 -5 -80" stroke="#e8e8e8" stroke-width="8" fill="none"/>
+                    <circle cx="-5" cy="-80" r="12" fill="#e8e8e8"/>
+                    <path d="M -5 -85 L 5 -90 L 5 -80 Z" fill="#ff6b9d"/>
+                    <line x1="-5" y1="30" x2="-10" y2="60" stroke="#e8e8e8" stroke-width="3"/>
+                    <line x1="5" y1="30" x2="10" y2="60" stroke="#e8e8e8" stroke-width="3"/>
+                    <ellipse cx="15" cy="-10" rx="30" ry="20" fill="#d0d0d0" opacity="0.7"/>
+                </g>
+                
+                <g transform="translate(300, 640)" fill="#ff6b9d">
+                    <ellipse cx="0" cy="0" rx="30" ry="12"/>
+                    <path d="M 30 0 L 45 -8 L 45 8 Z" fill="#ff9ec7"/>
+                    <circle cx="-15" cy="-3" r="2" fill="#0a0a0c"/>
+                </g>
+                
+                <circle cx="100" cy="200" r="5" fill="#ff9ec7" opacity="0.7"/>
+                <circle cx="400" cy="150" r="6" fill="#ff6b9d" opacity="0.6"/>
+                <circle cx="200" cy="300" r="4" fill="#ffd4e5" opacity="0.8"/>
+                <circle cx="500" cy="400" r="5" fill="#ff9ec7" opacity="0.7"/>
+                <circle cx="150" cy="450" r="6" fill="#ff6b9d" opacity="0.6"/>
+                <circle cx="350" cy="350" r="4" fill="#ffd4e5" opacity="0.8"/>
+                <circle cx="250" cy="500" r="5" fill="#ff9ec7" opacity="0.7"/>
+                <circle cx="450" cy="550" r="6" fill="#ff6b9d" opacity="0.6"/>
+                
+                <circle cx="100" cy="80" r="2" fill="#fff" opacity="0.8"/>
+                <circle cx="250" cy="50" r="1.5" fill="#fff" opacity="0.6"/>
+                <circle cx="400" cy="100" r="2" fill="#fff" opacity="0.7"/>
+                <circle cx="550" cy="60" r="1.5" fill="#fff" opacity="0.8"/>
+                <circle cx="50" cy="150" r="2" fill="#fff" opacity="0.6"/>
+            </svg>
+            
+            <h1>A Hundred Springs</h1>
+            <div class="subtitle">A koi, a crane, and a dream that took a lifetime of petals</div>
+            <div class="author">Zaragoza, Cyrel</div>
+        </div>
+
+        <!-- Story panels with illustrations -->
+        <div class="manga-panel">
+            <div class="story-text">
+                <p>The old crane stood at the edge of the mountain pond, as she had for longer than the village could remember.</p>
+                <p class="narration">Cranes live a thousand years. She remembered every spring.</p>
+            </div>
+            
+            <svg class="illustration" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="pond" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#0f3460;stop-opacity:0.8" />
+                    </linearGradient>
+                </defs>
+                <rect width="500" height="300" fill="#0a0a0c"/>
+                <ellipse cx="250" cy="250" rx="200" ry="40" fill="url(#pond)" opacity="0.6"/>
+                <g transform="translate(200, 180)" fill="#e8e8e8">
+                    <ellipse cx="0" cy="0" rx="20" ry="28"/>
+                    <path d="M -8 -25 Q -12 -50 -4 -65" stroke="#e8e8e8" stroke-width="6" fill="none"/>
+                    <circle cx="-4" cy="-65" r="10" fill="#e8e8e8"/>
+                    <path d="M -4 -70 L 3 -73 L 3 -65 Z" fill="#ff6b9d"/>
+                    <line x1="-3" y1="25" x2="-7" y2="50" stroke="#e8e8e8" stroke-width="2.5"/>
+                    <line x1="3" y1="25" x2="7" y2="50" stroke="#e8e8e8" stroke-width="2.5"/>
+                </g>
+            </svg>
+            
+            <div class="story-text">
+                <p>One morning, a small koi named Kohaku surfaced beside her.</p>
+                <div class="dialogue">"I'm going to climb the waterfall. The old stories say a koi who reaches the top becomes a dragon."</div>
+                <p>The crane said nothing. She had heard that promise before.</p>
             </div>
         </div>
 
-        <!-- Story Panel 1 -->
-        <div class="panel">
-            <div class="panel-content">
-                <div class="story-text">
-                    <p>The old crane stood at the edge of the mountain pond, as she had for longer than the village could remember.</p>
-                    <p class="narration">Cranes live a thousand years. She remembered every spring.</p>
-                    <p>One morning, a small koi named Kohaku surfaced beside her.</p>
-                    <div class="dialogue">"I'm going to climb the waterfall. The old stories say a koi who reaches the top becomes a dragon."</div>
-                    <p>The crane said nothing. She had heard that promise before.</p>
-                </div>
+        <div class="manga-panel">
+            <svg class="illustration" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="waterfall2" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#4a90e2;stop-opacity:0.4" />
+                        <stop offset="100%" style="stop-color:#fff;stop-opacity:0.6" />
+                    </linearGradient>
+                </defs>
+                <rect width="500" height="350" fill="#0a0a0c"/>
+                <rect x="200" y="50" width="100" height="250" fill="url(#waterfall2)" opacity="0.7"/>
+                <path d="M 200 50 Q 250 80 300 50 L 300 300 L 200 300 Z" fill="#fff" opacity="0.3"/>
+                <g transform="translate(250, 200) rotate(-30)" fill="#ff6b9d">
+                    <ellipse cx="0" cy="0" rx="25" ry="10"/>
+                    <path d="M 25 0 L 38 -6 L 38 6 Z" fill="#ff9ec7"/>
+                    <circle cx="-12" cy="-2" r="1.5" fill="#0a0a0c"/>
+                </g>
+                <circle cx="250" cy="250" r="30" fill="#4a90e2" opacity="0.3"/>
+                <circle cx="250" cy="250" r="20" fill="#fff" opacity="0.2"/>
+                <circle cx="100" cy="100" r="4" fill="#ff9ec7" opacity="0.7"/>
+                <circle cx="350" cy="80" r="5" fill="#ff6b9d" opacity="0.6"/>
+                <circle cx="400" cy="200" r="4" fill="#ffd4e5" opacity="0.8"/>
+                <circle cx="150" cy="180" r="5" fill="#ff9ec7" opacity="0.7"/>
+            </svg>
+            
+            <div class="story-text">
+                <p>Each spring, when the sakura petals fell like pink snow on the water, Kohaku tried.</p>
+                <p>She leapt against the white rush, and the water pushed her back.</p>
+                <p>Each spring, the crane stood beside her in the evenings, and they watched the petals drift together.</p>
+                <div class="dialogue">"Why do you stay?"</div>
+                <div class="dialogue">"I am watching the water."</div>
             </div>
         </div>
 
-        <!-- Story Panel 2 -->
-        <div class="panel">
-            <div class="panel-content">
-                <div class="story-text">
-                    <p>Each spring, when the sakura petals fell like pink snow on the water, Kohaku tried.</p>
-                    <p>She leapt against the white rush, and the water pushed her back.</p>
-                    <p>Each spring, the crane stood beside her in the evenings, and they watched the petals drift together.</p>
-                    <div class="dialogue">"Why do you stay?"</div>
-                    <div class="dialogue">"I am watching the water."</div>
-                </div>
+        <div class="manga-panel">
+            <div class="story-text">
+                <p>Years passed.</p>
+                <p>The village children flew carp streamers over the fields each May, and Kohaku watched them sway — paper koi swimming in the sky, climbing where real koi could not.</p>
+            </div>
+            
+            <svg class="illustration" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                <rect width="500" height="300" fill="#0a0a0c"/>
+                <rect width="500" height="200" fill="#1a1a2e" opacity="0.5"/>
+                <g transform="translate(100, 80)" fill="#ff6b9d">
+                    <ellipse cx="0" cy="0" rx="30" ry="10"/>
+                    <path d="M 30 0 L 45 -5 L 45 5 Z" fill="#ff9ec7"/>
+                    <line x1="0" y1="-10" x2="0" y2="-40" stroke="#666" stroke-width="2"/>
+                </g>
+                <g transform="translate(250, 60)" fill="#4a90e2">
+                    <ellipse cx="0" cy="0" rx="35" ry="12"/>
+                    <path d="M 35 0 L 50 -6 L 50 6 Z" fill="#6bb6ff"/>
+                    <line x1="0" y1="-12" x2="0" y2="-45" stroke="#666" stroke-width="2"/>
+                </g>
+                <g transform="translate(400, 100)" fill="#ffd700">
+                    <ellipse cx="0" cy="0" rx="28" ry="9"/>
+                    <path d="M 28 0 L 42 -5 L 42 5 Z" fill="#ffed4e"/>
+                    <line x1="0" y1="-9" x2="0" y2="-35" stroke="#666" stroke-width="2"/>
+                </g>
+                <ellipse cx="250" cy="250" rx="200" ry="30" fill="#0f3460" opacity="0.5"/>
+                <g transform="translate(250, 240)" fill="#ff6b9d" opacity="0.7">
+                    <ellipse cx="0" cy="0" rx="22" ry="8"/>
+                    <path d="M 22 0 L 32 -5 L 32 5 Z" fill="#ff9ec7"/>
+                </g>
+            </svg>
+            
+            <div class="story-text">
+                <p>She tried again.</p>
+                <p>She failed again.</p>
+                <p class="narration">Her scales grew dull at the edges.</p>
             </div>
         </div>
 
-        <!-- Story Panel 3 -->
-        <div class="panel">
-            <div class="panel-content">
-                <div class="story-text">
-                    <p>Years passed.</p>
-                    <p>The village children flew carp streamers over the fields each May, and Kohaku watched them sway — paper koi swimming in the sky, climbing where real koi could not.</p>
-                    <p>She tried again.</p>
-                    <p>She failed again.</p>
-                    <p class="narration">Her scales grew dull at the edges.</p>
-                </div>
+        <div class="manga-panel">
+            <svg class="illustration" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                <rect width="500" height="300" fill="#0a0a0c"/>
+                <circle cx="100" cy="50" r="2" fill="#fff" opacity="0.8"/>
+                <circle cx="200" cy="80" r="1.5" fill="#fff" opacity="0.6"/>
+                <circle cx="350" cy="40" r="2" fill="#fff" opacity="0.7"/>
+                <circle cx="450" cy="100" r="1.5" fill="#fff" opacity="0.8"/>
+                <circle cx="400" cy="80" r="30" fill="#e8e8e8" opacity="0.3"/>
+                <g transform="translate(150, 200)" fill="#e8e8e8">
+                    <ellipse cx="0" cy="0" rx="18" ry="25"/>
+                    <path d="M -7 -22 Q -10 -45 -3 -58" stroke="#e8e8e8" stroke-width="5" fill="none"/>
+                    <circle cx="-3" cy="-58" r="9" fill="#e8e8e8"/>
+                </g>
+                <ellipse cx="250" cy="250" rx="150" ry="25" fill="#0f3460" opacity="0.5"/>
+                <g transform="translate(250, 240)" fill="#ff6b9d" opacity="0.8">
+                    <ellipse cx="0" cy="0" rx="20" ry="7"/>
+                    <path d="M 20 0 L 30 -4 L 30 4 Z" fill="#ff9ec7"/>
+                </g>
+            </svg>
+            
+            <div class="story-text">
+                <p>One evening, the crane finally spoke of long ago.</p>
+                <div class="dialogue">"There was another koi. Your mother. She tried the waterfall too, one spring. I told her it was impossible."</div>
+                <p class="narration">The crane's voice was quiet.</p>
+                <div class="dialogue">"She never came back. I have stood here since, in case the water brought her home."</div>
+                <p>Kohaku said nothing. She just stayed beside the crane until the stars came out.</p>
             </div>
         </div>
 
-        <!-- Story Panel 4 -->
-        <div class="panel">
-            <div class="panel-content">
-                <div class="story-text">
-                    <p>One evening, the crane finally spoke of long ago.</p>
-                    <div class="dialogue">"There was another koi. Your mother. She tried the waterfall too, one spring. I told her it was impossible."</div>
-                    <p class="narration">The crane's voice was quiet.</p>
-                    <div class="dialogue">"She never came back. I have stood here since, in case the water brought her home."</div>
-                    <p>Kohaku said nothing. She just stayed beside the crane until the stars came out.</p>
-                </div>
+        <div class="manga-panel">
+            <svg class="illustration" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="climb" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" style="stop-color:#4a90e2;stop-opacity:0.5" />
+                        <stop offset="100%" style="stop-color:#fff;stop-opacity:0.8" />
+                    </linearGradient>
+                </defs>
+                <rect width="500" height="400" fill="#0a0a0c"/>
+                <rect x="200" y="0" width="100" height="400" fill="url(#climb)" opacity="0.6"/>
+                <g transform="translate(250, 350)" fill="#ff6b9d" opacity="0.4">
+                    <ellipse cx="0" cy="0" rx="18" ry="7"/>
+                </g>
+                <g transform="translate(250, 280)" fill="#ff6b9d" opacity="0.6">
+                    <ellipse cx="0" cy="0" rx="18" ry="7"/>
+                </g>
+                <g transform="translate(250, 200)" fill="#ff6b9d" opacity="0.8">
+                    <ellipse cx="0" cy="0" rx="18" ry="7"/>
+                </g>
+                <g transform="translate(250, 120)" fill="#ff6b9d">
+                    <ellipse cx="0" cy="0" rx="20" ry="8"/>
+                    <path d="M 20 0 L 30 -5 L 30 5 Z" fill="#ff9ec7"/>
+                </g>
+                <circle cx="150" cy="100" r="4" fill="#ff9ec7" opacity="0.7"/>
+                <circle cx="350" cy="150" r="5" fill="#ff6b9d" opacity="0.6"/>
+                <circle cx="180" cy="250" r="4" fill="#ffd4e5" opacity="0.8"/>
+                <circle cx="320" cy="300" r="5" fill="#ff9ec7" opacity="0.7"/>
+            </svg>
+            
+            <div class="story-text">
+                <p>The next spring, the petals fell.</p>
+                <p>Kohaku swam to the foot of the falls.</p>
+                <p>She did not leap with anger.</p>
+                <p>She climbed — one push, one rest, one push — the way the crane had stood beside her, patiently, year after year.</p>
+                <p class="narration">The waterfall was loud. And then, somehow, it was below her.</p>
             </div>
         </div>
 
-        <!-- Story Panel 5 -->
-        <div class="panel">
-            <div class="panel-content">
-                <div class="story-text">
-                    <p>The next spring, the petals fell.</p>
-                    <p>Kohaku swam to the foot of the falls.</p>
-                    <p>She did not leap with anger.</p>
-                    <p>She climbed — one push, one rest, one push — the way the crane had stood beside her, patiently, year after year.</p>
-                    <p class="narration">The waterfall was loud. And then, somehow, it was below her.</p>
-                </div>
+        <div class="manga-panel">
+            <svg class="illustration" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="dragon" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#e8e8e8;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#c0c0c0;stop-opacity:1" />
+                    </linearGradient>
+                    <radialGradient id="glow">
+                        <stop offset="0%" style="stop-color:#fff;stop-opacity:0.3" />
+                        <stop offset="100%" style="stop-color:#fff;stop-opacity:0" />
+                    </radialGradient>
+                </defs>
+                <rect width="500" height="350" fill="#0a0a0c"/>
+                <circle cx="250" cy="175" r="150" fill="url(#glow)"/>
+                <g transform="translate(250, 175)" fill="none" stroke="url(#dragon)" stroke-width="3" opacity="0.9">
+                    <path d="M -100 0 Q -80 -30 -60 0 Q -40 30 -20 0 Q 0 -30 20 0 Q 40 30 60 0 Q 80 -30 100 0"/>
+                    <circle cx="-100" cy="0" r="12" fill="url(#dragon)"/>
+                    <path d="M 100 0 L 120 -15 M 100 0 L 120 15"/>
+                    <path d="M -100 -10 Q -120 -20 -130 -15" stroke-width="2"/>
+                    <path d="M -100 10 Q -120 20 -130 15" stroke-width="2"/>
+                </g>
+                <ellipse cx="100" cy="100" rx="50" ry="20" fill="#1a1a2e" opacity="0.5"/>
+                <ellipse cx="400" cy="250" rx="60" ry="25" fill="#1a1a2e" opacity="0.5"/>
+            </svg>
+            
+            <div class="story-text">
+                <p>Kohaku rose into the morning sky, long and silver, a dragon at last.</p>
+                <p>She circled the pond once, gently, so the crane would not be startled.</p>
+                <p>Then she climbed into the clouds.</p>
+                <p>The crane watched until there was nothing to see.</p>
             </div>
         </div>
 
-        <!-- Story Panel 6 -->
-        <div class="panel">
-            <div class="panel-content">
-                <svg class="illustration" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="morning" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#ffd4e5;stop-opacity:0.2" />
-                            <stop offset="100%" style="stop-color:#0a0a0c;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <rect width="400" height="200" fill="url(#morning)"/>
-                    
-                    <!-- Dragon silhouette -->
-                    <g transform="translate(200, 100)" fill="none" stroke="#e8e8e8" stroke-width="2" opacity="0.8">
-                        <path d="M -80 0 Q -60 -20 -40 0 Q -20 20 0 0 Q 20 -20 40 0 Q 60 20 80 0"/>
-                        <circle cx="-80" cy="0" r="8"/>
-                        <path d="M 80 0 L 100 -10 M 80 0 L 100 10"/>
-                    </g>
-                </svg>
-                <div class="story-text">
-                    <p>Kohaku rose into the morning sky, long and silver, a dragon at last.</p>
-                    <p>She circled the pond once, gently, so the crane would not be startled.</p>
-                    <p>Then she climbed into the clouds.</p>
-                    <p>The crane watched until there was nothing to see.</p>
-                </div>
+        <div class="manga-panel">
+            <svg class="illustration" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                <rect width="500" height="300" fill="#0a0a0c"/>
+                <rect width="500" height="200" fill="#1a1a2e" opacity="0.3"/>
+                <g transform="translate(250, 100)" fill="#e8e8e8" opacity="0.6">
+                    <ellipse cx="0" cy="0" rx="60" ry="20"/>
+                    <path d="M 60 0 L 80 -10 L 80 10 Z"/>
+                    <circle cx="-30" cy="-5" r="3" fill="#0a0a0c" opacity="0.5"/>
+                </g>
+                <ellipse cx="250" cy="250" rx="180" ry="35" fill="#0f3460" opacity="0.5"/>
+                <g transform="translate(200, 220)" fill="#e8e8e8">
+                    <ellipse cx="0" cy="0" rx="18" ry="25"/>
+                    <path d="M -7 -22 Q -10 -45 -3 -58" stroke="#e8e8e8" stroke-width="5" fill="none"/>
+                    <circle cx="-3" cy="-58" r="9" fill="#e8e8e8"/>
+                </g>
+                <circle cx="100" cy="150" r="4" fill="#ff9ec7" opacity="0.7"/>
+                <circle cx="300" cy="120" r="5" fill="#ff6b9d" opacity="0.6"/>
+                <circle cx="400" cy="180" r="4" fill="#ffd4e5" opacity="0.8"/>
+                <circle cx="150" cy="200" r="5" fill="#ff9ec7" opacity="0.7"/>
+                <circle cx="350" cy="160" r="4" fill="#ff6b9d" opacity="0.6"/>
+            </svg>
+            
+            <div class="story-text">
+                <p>Now, every spring, when the sakura falls, a silver cloud shaped like a koi passes over the mountain pond.</p>
+                <p>And the old crane bows her head.</p>
+                <div class="dialogue">"You climbed. I'm glad I stayed."</div>
             </div>
         </div>
 
-        <!-- Story Panel 7 -->
-        <div class="panel">
-            <div class="panel-content">
-                <div class="story-text">
-                    <p>Now, every spring, when the sakura falls, a silver cloud shaped like a koi passes over the mountain pond.</p>
-                    <p>And the old crane bows her head.</p>
-                    <div class="dialogue">"You climbed. I'm glad I stayed."</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Closing Panel -->
-        <div class="panel closing-panel">
-            <div class="panel-content">
-                <div class="final-line">Some dreams take a hundred springs.<br>The water remembers everyone who tries.</div>
-                <div class="credit">© 2026 Zaragoza, Cyrel</div>
-            </div>
+        <div class="closing">
+            <div class="final-line">Some dreams take a hundred springs.<br>The water remembers everyone who tries.</div>
+            <div class="credit">© 2026 Zaragoza, Cyrel</div>
         </div>
     </div>
 
     <script>
-        // Sakura petal animation
         function createPetal() {
             const petal = document.createElement('div');
             petal.className = 'petal';
             petal.style.left = Math.random() * 100 + 'vw';
             petal.style.top = '-10px';
-            petal.style.animationDuration = (Math.random() * 3 + 4) + 's';
             document.body.appendChild(petal);
 
-            const duration = parseFloat(petal.style.animationDuration) * 1000;
-            
+            const duration = (Math.random() * 3 + 4) * 1000;
             let startTime = null;
             const startX = parseFloat(petal.style.left);
             const drift = (Math.random() - 0.5) * 100;
@@ -416,9 +496,9 @@
                 const progress = elapsed / duration;
 
                 if (progress < 1) {
-                    const y = progress * window.innerHeight;
-                    const x = startX + drift * Math.sin(progress * Math.PI * 2);
-                    petal.style.transform = `translate(${x - startX}vw, ${y}px) rotate(${progress * 360}deg)`;
+                    const y = progress * (window.innerHeight + 100);
+                    const x = drift * Math.sin(progress * Math.PI * 2);
+                    petal.style.transform = `translate(${x}vw, ${y}px) rotate(${progress * 360}deg)`;
                     requestAnimationFrame(animate);
                 } else {
                     petal.remove();
@@ -428,43 +508,7 @@
             requestAnimationFrame(animate);
         }
 
-        // Create petals periodically
-        setInterval(createPetal, 800);
-
-        // Smooth scroll with drag
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        const container = document.querySelector('.manga-container');
-
-        container.addEventListener('mousedown', (e) => {
-            isDown = true;
-            startX = e.pageX - container.offsetLeft;
-            scrollLeft = container.scrollLeft;
-        });
-
-        container.addEventListener('mouseleave', () => {
-            isDown = false;
-        });
-
-        container.addEventListener('mouseup', () => {
-            isDown = false;
-        });
-
-        container.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - container.offsetLeft;
-            const walk = (x - startX) * 2;
-            container.scrollLeft = scrollLeft - walk;
-        });
-
-        // Hide scroll hint after first scroll
-        container.addEventListener('scroll', () => {
-            const hint = document.querySelector('.scroll-hint');
-            if (hint) hint.style.display = 'none';
-        }, { once: true });
+        setInterval(createPetal, 600);
     </script>
 </body>
 </html>
