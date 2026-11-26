@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A Hundred Springs — Sai Shido</title>
+
+  <meta name="description" content="An original short story — a koi, a crane, and a dream that took a lifetime of petals.">
+  <meta name="author" content="Sai Shido">
+  <meta name="theme-color" content="#08080c">
+
+  <meta property="og:title" content="A Hundred Springs">
+  <meta property="og:description" content="An original short story — a koi, a crane, and a dream that took a lifetime of petals.">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2308080c'/%3E%3Cpath d='M50 16c12 12 18 22 18 34 0 16-8 26-18 34-10-8-18-18-18-34 0-12 6-22 18-34z' fill='%23ffb7c5'/%3E%3Ccircle cx='50' cy='52' r='7' fill='%2308080c'/%3E%3C/svg%3E">
+
+  <style>
+    :root {
+      --bg: #08080c;
+      --panel: #0e0e14;
+      --ink: #f5efe4;
+      --muted: rgba(245, 239, 228, 0.72);
+      --line: rgba(245, 239, 228, 0.22);
+      --accent: #ffb7c5;
+      --silver: #dfe7f0;
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top center, rgba(255, 183, 197, 0.08), transparent 22%),
+        radial-gradient(circle at 20% 20%, rgba(223, 231, 240, 0.05), transparent 18%),
+        var(--bg);
+      color: var(--ink);
+      font-family:
+        "Iowan Old Style",
+        "Palatino Linotype",
+        "Book Antiqua",
+        "Hiragino Mincho ProN",
+        "Yu Mincho",
+        "Noto Serif JP",
+        serif;
+      line-height: 1.85;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.03),
+          transparent 18%,
+          transparent 82%,
+          rgba(255, 255, 255, 0.02)
+        );
+    }
+
+    .grain {
+      position: fixed;
+      inset: -10%;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.12;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.22) 1px, transparent 1px);
+      background-size: 3px 3px;
+      mix-blend-mode: soft-light;
+    }
+
+    .petals {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      top: -12vh;
+      left: var(--left);
+      width: calc(12px * var(--scale));
+      height: calc(10px * var(--scale));
+      background: linear-gradient(
+        135deg,
+        rgba(255, 183, 197, 0.95),
+        rgba(255, 183, 197, 0.25)
+      );
+      border-radius: 100% 0 100% 0;
+      opacity: 0;
+      animation: petalFall var(--duration) linear var(--delay) infinite;
+      filter: drop-shadow(0 0 8px rgba(255, 183, 197, 0.16));
+    }
+
+    @keyframes petalFall {
+      0% {
+        transform: translate3d(0, -10vh, 0) rotate(0deg);
+        opacity: 0;
+      }
+
+      8% {
+        opacity: var(--opacity);
+      }
+
+      92% {
+        opacity: var(--opacity);
+      }
+
+      100% {
+        transform: translate3d(var(--drift), 112vh, 0) rotate(340deg);
+        opacity: 0;
+      }
+    }
+
+    main {
+      position: relative;
+      z-index: 3;
+      width: min(920px, calc(100vw - 24px));
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    .panel {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+        var(--panel);
+      border: 1px solid var(--line);
+      box-shadow:
+        0 0 0 6px rgba(255, 255, 255, 0.03),
+        0 24px 80px var(--shadow);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 72px 22px 60px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          115deg,
+          transparent 0 18px,
+          rgba(255, 255, 255, 0.03) 18px 19px
+        );
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .kicker {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 18px 0 16px;
+      font-size: clamp(3rem, 10vw, 6rem);
+      line-height: 1.05;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .sub {
+      max-width: 34ch;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .byline {
+      margin: 22px 0 0;
+      color: var(--silver);
+      letter-spacing: 0.08em;
+    }
+
+    .section-title {
+      margin: 64px 0 24px;
+      text-align: center;
+      font-size: 1rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .scene,
+    .final {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+    }
+
+    .scene.visible,
+    .final.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .scene {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 20px;
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+
+    .kanji {
+      display: grid;
+      place-items: center;
+      border-right: 1px solid var(--line);
+      padding-right: 12px;
+    }
+
+    .kanji span {
+      font-size: 3.2rem;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      color: rgba(255, 255, 255, 0.9);
+      text-shadow: 0 0 24px rgba(255, 183, 197, 0.2);
+    }
+
+    .kanji small {
+      margin-top: 12px;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+    }
+
+    .scene-content header {
+      margin-bottom: 16px;
+    }
+
+    .scene-label {
+      margin: 0;
+      color: var(--accent);
+      font-size: 0.8rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      margin: 8px 0 0;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      line-height: 1.2;
+    }
+
+    p {
+      margin: 0 0 1.2em;
+    }
+
+    .final {
+      text-align: center;
+      padding: 56px 24px;
+      margin-top: 36px;
+    }
+
+    .closing {
+      font-size: clamp(1.4rem, 4vw, 2.4rem);
+      line-height: 1.5;
+      margin: 0;
+      color: var(--silver);
+    }
+
+    .credit {
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 28px 0 12px;
+    }
+
+    @media (max-width: 700px) {
+      .scene {
+        grid-template-columns: 1fr;
+      }
+
+      .kanji {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        padding: 0 0 10px;
+      }
+
+      .kanji span {
+        writing-mode: horizontal-tb;
+        font-size: 2.5rem;
+      }
+
+      .kanji small {
+        writing-mode: horizontal-tb;
+        margin: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .petal {
+        display: none;
+      }
+
+      .scene,
+      .final {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+
+  <noscript>
+    <style>
+      .scene,
+      .final {
+        opacity: 1;
+        transform: none;
+      }
+    </style>
+  </noscript>
+</head>
+
+<body>
+  <div class="petals" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main>
+    <header class="hero panel">
+      <div class="hero-inner">
+        <p class="kicker" lang="ja">百の春</p>
+        <h1>A Hundred Springs</h1>
+        <p class="sub">
+          An original short story — a koi, a crane, and a dream that took a lifetime of petals.
+        </p>
+        <p class="byline">
+          Original story by <strong>Sai Shido</strong>
+        </p>
+      </div>
+    </header>
+
+    <section class="story" aria-label="A Hundred Springs story">
+      <h2 class="section-title">The Story · Seven Scenes</h2>
+
+      <article class="scene panel">
+        <aside class="kanji" aria-hidden="true">
+          <span lang="ja">春</span>
+          <small>Scene 1</small>
+        </aside>
+
+        <div class="scene-content">
+          <header>
+            <p class="scene-label">Scene 1 · Spring</p>
+            <h3>The Promise</h3>
+          </header>
+
+          <p>
+            The old crane stood at the edge of the mountain pond, as she had for longer
+            than the village could remember. Cranes live a thousand years. She remembered
+            every spring.
+          </p>
+
+          <p>
+            One morning, a small koi named Kohaku surfaced beside her.
+          </p>
+
+          <p>
+            “I’m going to climb the waterfall,” Kohaku said. “The old stories say a koi
+            who reaches the top becomes a dragon.”
+          </p>
+
+          <p>
+            The crane said nothing. She had heard that promise before.
+          </p>
+        </div>
+      </article>
+
+      <article class="scene panel">
+        <aside class="kanji" aria-hidden="true">
+          <span lang="ja">春</span>
+          <small>Scene 2</small>
+        </aside>
+
+        <div class="scene-content">
+          <header>
+            <p class="scene-label">Scene 2 · Spring, again</p>
+            <h3>The Watching</h3>
+          </header>
+
+          <p>
+            Each spring, when the sakura petals fell like pink snow on the water, Kohaku
+            tried. She leapt against the white rush, and the water pushed her back. Each
+            spring, the crane stood beside her in the evenings, and they watched the petals
+            drift together.
+          </p>
+
+          <p>
+            “Why do you stay?” Kohaku asked once.
+          </p>
+
+          <p>
+            “I am watching the water,” the crane said.
+          </p>
+        </div>
+      </article>
+
+      <article class="scene panel">
+        <aside class="kanji" aria-hidden="true">
+          <span lang="ja">夏</span>
+          <small>Scene 3</small>
+        </aside>
+
+        <div class="scene-content">
+          <header>
+            <p class="scene-label">Scene 3 · Summer</p>
+            <h3>Paper Koi</h3>
+          </header>
+
+          <p>
+            Years passed. The village children flew carp streamers over the fields each May,
+            and Kohaku watched them sway — paper koi swimming in the sky, climbing where
+            real koi could not.
+          </p>
+
+          <p>
+            She tried again. She failed again. Her scales grew dull at the edges.
+          </p>
+        </div>
+      </article>
+
+      <article class="scene panel">
+        <aside class="kanji" aria-hidden="true">
+          <span lang="ja">秋</span>
+          <small>Scene 4</small>
+        </aside>
+
+        <div class="scene-content">
+          <header>
+            <p class="scene-label">Scene 4 · Autumn, night</p>
+            <h3>The Memory</h3>
+          </header>
+
+          <p>
+            One evening, the crane finally spoke of long ago.
+          </p>
+
+          <p>
+            “There was another koi,” she said. “Your mother. She tried the waterfall too,
+            one spring. I told her it was impossible.”
+          </p>
+
+          <p>
+            The crane’s voice was quiet.
+          </p>
+
+          <p>
+            “She never came back. I have stood here since, in case the water brought her home.”
+          </p>
+
+          <p>
+            Kohaku said nothing. She just stayed beside the crane until the stars came out.
+          </p>
+        </div>
+      </article>
+
+      <article class="scene panel">
+        <aside class="kanji" aria-hidden="true">
+          <span lang="ja">冬</span>
+          <small>Scene 5</small>
+        </aside>
+
+        <div class="scene-content">
+          <header>
+            <p class="scene-label">Scene 5 · Winter into Spring</p>
+            <h3>The Climb</h3>
+          </header>
+
+          <p>
+            The next spring, the petals fell. Kohaku swam to the foot of the falls.
+            She did not leap with anger. She climbed — one push, one rest, one push —
+            the way the crane had stood beside her, patiently, year after year.
+          </p>
+
+          <p>
+            The waterfall was loud. And then, somehow, it was below her.
+          </p>
+        </div>
+      </article>
+
+      <article class="scene panel">
+        <aside class="kanji" aria-hidden="true">
+          <span lang="ja">空</span>
+          <small>Scene 6</small>
+        </aside>
+
+        <div class="scene-content">
+          <header>
+            <p class="scene-label">Scene 6 · Sky</p>
+            <h3>Silver</h3>
+          </header>
+
+          <p>
+            Kohaku rose into the morning sky, long and silver, a dragon at last.
+            She circled the pond once, gently, so the crane would not be startled.
+            Then she climbed into the clouds.
+          </p>
+
+          <p>
+            The crane watched until there was nothing to see.
+          </p>
+        </div>
+      </article>
+
+      <article class="scene panel">
+        <aside class="kanji" aria-hidden="true">
+          <span lang="ja">帰</span>
+          <small>Scene 7</small>
+        </aside>
+
+        <div class="scene-content">
+          <header>
+            <p class="scene-label">Scene 7 · Return</p>
+            <h3>Welcome Home</h3>
+          </header>
+
+          <p>
+            Now, every spring, when the sakura falls, a silver cloud shaped like a koi
+            passes over the mountain pond, and the old crane bows her head.
+          </p>
+
+          <p>
+            “You climbed,” she says. “I’m glad I stayed.”
+          </p>
+        </div>
+      </article>
+
+      <article class="final panel">
+        <p class="closing">
+          Some dreams take a hundred springs.<br>
+          The water remembers everyone who tries.
+        </p>
+        <p class="credit">
+          © <span id="year"></span> Sai Shido
+        </p>
+      </article>
+    </section>
+
+    <footer>
+      <p>A dark manga-style web edition of “A Hundred Springs.”</p>
+    </footer>
+  </main>
+
+  <script>
+    const yearElement = document.getElementById("year");
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const petalsContainer = document.querySelector(".petals");
+
+    if (!reducedMotion && petalsContainer) {
+      const petalCount = window.innerWidth < 700 ? 18 : 34;
+      const fragment = document.createDocumentFragment();
+
+      for (let i = 0; i < petalCount; i++) {
+        const petal = document.createElement("span");
+        petal.className = "petal";
+
+        const left = Math.random() * 100;
+        const duration = 9 + Math.random() * 14;
+        const delay = -Math.random() * 20;
+        const opacity = 0.18 + Math.random() * 0.45;
+        const scale = 0.55 + Math.random() * 0.95;
+        const drift = (Math.random() * 18 - 9).toFixed(2) + "vw";
+
+        petal.style.setProperty("--left", left + "%");
+        petal.style.setProperty("--duration", duration + "s");
+        petal.style.setProperty("--delay", delay + "s");
+        petal.style.setProperty("--opacity", opacity);
+        petal.style.setProperty("--scale", scale);
+        petal.style.setProperty("--drift", drift);
+
+        fragment.appendChild(petal);
+      }
+
+      petalsContainer.appendChild(fragment);
+    }
+
+    const animatedSections = document.querySelectorAll(".scene, .final");
+
+    if (!reducedMotion && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.18
+        }
+      );
+
+      animatedSections.forEach((section) => observer.observe(section));
+    } else {
+      animatedSections.forEach((section) => section.classList.add("visible"));
+    }
+  </script>
+</body>
+</html>
